@@ -1,0 +1,9 @@
+.slds-pill__label, .pillitem
+{
+    padding: 1px;
+}
+
+.pillitem span span
+{
+    padding: 10px;
+}
