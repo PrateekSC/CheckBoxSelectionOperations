@@ -1,0 +1,56 @@
+<template>
+    <div class="slds-form-element slds-card">
+         <label class='slds-m-around_x-small'><small>Color selection</small></label>
+         <div class="slds-form-element__control">
+                 <div class="slds-combobox_container">
+                    <div >
+                        <lightning-button label="Show selection" title="Show selection" onclick={handleSelectButtonClick} class="slds-m-left_x-small"></lightning-button>                                
+                        <div class="slds-form-element__control slds-input-has-icon slds-input-has-icon slds-input-has-icon_left-right" role="none">
+                            <template for:each={selectedItems} for:item="selectedItem">
+                                <span key={selectedItem.value}>
+                                    <lightning-pill label={selectedItem.label} name={selectedItem.value} data-item={selectedItem.value}
+                                        class='pillitem' onremove={handleRemoveItemFromSelected}>
+                                    </lightning-pill>
+                                </span>
+                            </template>                     
+                        </div>
+                    </div>
+                    
+                    <div class="slds-combobox slds-dropdown-trigger slds-dropdown-trigger_click slds-is-open"  aria-expanded="true" aria-haspopup="listbox" role="combobox">
+                            <template if:true={isShowSelectionDialog}>
+                                <div class="slds-combobox slds-dropdown-trigger slds-dropdown-trigger_click slds-has-focus" role="none">
+                                    <lightning-input id="input" 
+                                        value={searchInput} onchange={onchangeSearchInput} variant="label-hidden" aria-autocomplete="list" role="textbox"
+                                        autocomplete="off" placeholder="Search..." type="search">
+                                    </lightning-input>
+                                </div>
+        
+                                <section aria-describedby="dialog-body-id-26" aria-label="Language Options"  class="slds-popover slds-popover_full-width" id="popover-unique-id-02" role="dialog">
+                                    <header class="slds-popover__footer slds-popover__footer_form">
+                                        <lightning-button label="Select all" title="Select all" 
+                                                onclick={handleSelectAllClick} class="slds-m-left_x-small"></lightning-button>
+                                        <lightning-button label="Clear all" title="Clear all"
+                                                onclick={handleClearAllClick} class="slds-m-left_x-small"></lightning-button>                                
+                                    </header>
+                                    <div class="slds-popover__body slds-popover__body_small" id="items">
+                                        <template for:each={items} for:item="selectedItem">
+                                            <span key={selectedItem.value}>
+                                                <lightning-input type="checkbox" label={selectedItem.label} value={selectedItem.value}  data-item={selectedItem.value} 
+                                                checked={selectedItem.isSelected}
+                                                onchange={handleInputCheckboxChange} >
+                                                </lightning-input>
+                                            </span>
+                                        </template>                     
+                                    </div>
+
+                                    <footer class="slds-popover__footer slds-popover__footer_form">
+                                        <lightning-button label="Close" title="Close" 
+                                                onclick={handleCancelClick} class="slds-m-left_x-small"></lightning-button>
+                                    </footer>
+                                </section>                                               
+                            </template>
+                    </div>
+             </div>
+         </div>
+     </div>
+   </template>
